@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>Joc de preguntes</title>
+</head>
+<body>
+
+    <!-- Botó d'administació -->
+    <button id="btnAdmin" onclick="obrirAdmin()" title="Administrar preguntes">⚙</button>
+
+    <!-- Modal CRUD -->
+    <div id="modalOverlay" class="hidden" onclick="tancarAdmin(event)">
+        <div id="modalPanel">
+            <div id="modalHeader">
+                <h2>Administrar preguntes</h2>
+                <button id="btnTancar" onclick="tancarAdmin()">✕</button>
+            </div>
+
+            <!-- Formulari per crear una pregunta nova -->
+            <div id="formNovaPregunta">
+                <h3>Nova pregunta</h3>
+                <input id="inputPregunta" type="text" placeholder="Text de la pregunta">
+                <input id="inputImatge"   type="text" placeholder="URL de la imatge">
+                <button onclick="crearPregunta()">+ Afegir pregunta</button>
+            </div>
+
+            <!-- Llista de preguntes -->
+            <div id="llistaPreguntesAdmin"></div>
+        </div>
+    </div>
+
+    <div id="marcador">
+        <div id="usuariBar">
+            <span>👤 Jugador: <strong id="nomUsuariText"></strong></span>
+            <button id="btnCanviarNom" onclick="canviarNom()" title="Canviar nom">✏️ Canviar</button>
+        </div>
+        <p id="progresText">Preguntes respostes: 0 de 10</p>
+        <progress id="progres" value="0" max="10"></progress>
+    </div>
+
+    <div id="partida"></div>
+
+    <button id="enviarResultats" onclick="enviar()" disabled>
+        Enviar Resultats
+    </button>
+
+    <button id="btnReiniciar" onclick="reiniciar()">
+        🔄 Reiniciar
+    </button>
+
+    <!-- Panel de resultats amb animació -->
+    <div id="panellResultat" class="hidden">
+        <div id="animacioEmoji"></div>
+        <p id="missatgeResultat"></p>
+        <button id="btnTornarJugar" onclick="tornarJugar()">▶ Volver a jugar</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="crud.js"></script>
+</body>
+</html>

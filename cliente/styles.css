@@ -1,0 +1,600 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0d0f1a;
+    --surface: #161928;
+    --card: #1e2236;
+    --border: #2a2e4a;
+    --accent: #6c63ff;
+    --accent2: #a78bfa;
+    --success: #34d399;
+    --danger: #f87171;
+    --text: #e2e8f0;
+    --muted: #8892b0;
+    --radius: 14px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+html {
+    min-height: 100vh;
+    font-family: "Outfit", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 64px;
+    background:
+        radial-gradient(
+            ellipse at top,
+            rgba(108, 99, 255, 0.18),
+            transparent 600px
+        ),
+        var(--bg);
+}
+
+/* Marcador y barra de progreso */
+
+#marcador {
+    position: sticky;
+    top: 12px;
+    z-index: 5;
+    width: 100%;
+    max-width: 560px;
+    margin-bottom: 28px;
+    padding: 16px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+#usuariBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+#usuariBar strong {
+    color: var(--accent2);
+}
+
+#btnCanviarNom {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+#btnCanviarNom:hover {
+    color: var(--text);
+    background: var(--border);
+}
+
+#marcador h1 {
+    margin-bottom: 8px;
+    font-size: 1.35rem;
+}
+
+#progresText {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+#progres {
+    display: block;
+    width: 100%;
+    height: 16px;
+    margin-top: 12px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 20px;
+    background: var(--border);
+    accent-color: var(--accent);
+}
+
+#progres::-webkit-progress-bar {
+    background: var(--border);
+}
+
+#progres::-webkit-progress-value {
+    background: var(--accent);
+    transition: width 0.2s;
+}
+
+#progres::-moz-progress-bar {
+    background: var(--accent);
+}
+
+/* Contenedor del cuestionario */
+
+#partida {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 21px;
+    box-shadow: var(--shadow);
+}
+
+#partida > p {
+    width: 100%;
+    line-height: 1.6;
+}
+
+#estat {
+    color: var(--muted);
+}
+
+#preguntes {
+    width: 100%;
+    display: grid;
+    gap: 32px;
+}
+
+/* Tarjetas de preguntas */
+
+.pregunta {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.pregunta legend {
+    padding: 0 6px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.pregunta img {
+    display: block;
+    width: 200px;
+    max-width: 100%;
+    height: 130px;
+    margin: 12px auto 20px;
+    object-fit: contain;
+}
+
+/* Opciones de respuesta */
+
+.opcio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    padding: 14px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        border-color 0.2s;
+}
+
+.opcio:hover {
+    border-color: var(--accent);
+}
+
+.opcio input {
+    flex-shrink: 0;
+    accent-color: var(--accent2);
+}
+
+/* Marcar visualmente la respuesta seleccionada */
+
+.opcio:has(input:checked) {
+    background: #342d68;
+    border-color: var(--accent2);
+}
+
+.opcio:focus-within {
+    outline: 2px solid var(--accent2);
+    outline-offset: 3px;
+}
+
+.opcio:has(input:disabled) {
+    cursor: default;
+}
+
+/* Botons d'enviar i reiniciar */
+
+#enviarResultats,
+#btnReiniciar {
+    padding: 15px 30px;
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+}
+
+#enviarResultats {
+    margin-top: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+}
+
+#btnReiniciar {
+    margin-top: 8px;
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--border);
+}
+
+#enviarResultats:hover:not(:disabled),
+#btnReiniciar:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+#enviarResultats:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Panel de resultats */
+
+#panellResultat {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 560px;
+    padding: 32px 24px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: apareix 0.4s ease;
+}
+
+@keyframes apareix {
+    from { opacity: 0; transform: scale(0.85) translateY(20px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+#panellResultat[data-nivell="dolent"]  { background: #2a1a1a; border: 2px solid var(--danger); }
+#panellResultat[data-nivell="regular"] { background: #2a2010; border: 2px solid #f59e0b; }
+#panellResultat[data-nivell="be"]      { background: #0f2a1a; border: 2px solid var(--success); }
+#panellResultat[data-nivell="perfecte"]{ background: #1a1a00; border: 2px solid gold; }
+
+#animacioEmoji {
+    font-size: 4rem;
+    animation: bota 0.6s ease infinite alternate;
+}
+
+@keyframes bota {
+    from { transform: translateY(0)   scale(1); }
+    to   { transform: translateY(-12px) scale(1.15); }
+}
+
+#panellResultat[data-nivell="perfecte"] #animacioEmoji {
+    animation: gira 1s linear infinite;
+}
+
+@keyframes gira {
+    from { transform: rotate(0deg)   scale(1); }
+    50%  { transform: rotate(180deg) scale(1.3); }
+    to   { transform: rotate(360deg) scale(1); }
+}
+
+#missatgeResultat {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+#btnTornarJugar {
+    margin-top: 8px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+}
+
+#btnTornarJugar:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+
+/* Corrección y resultados */
+
+.correccio {
+    margin-top: 18px;
+    line-height: 1.5;
+}
+
+.encert {
+    border-color: var(--success);
+}
+
+.encert .correccio {
+    color: var(--success);
+}
+
+.error {
+    border-color: var(--danger);
+}
+
+.error .correccio {
+    color: var(--danger);
+}
+
+#resultats {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid var(--accent2);
+    border-radius: var(--radius);
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 480px) {
+    #partida {
+        padding: 24px 16px;
+    }
+
+    .pregunta {
+        padding: 14px;
+    }
+}
+
+/* ── Botó d'engranatge ─────────────────────────────────────────────────────── */
+
+#btnAdmin {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 100;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.2s;
+    box-shadow: var(--shadow);
+}
+
+#btnAdmin:hover {
+    color: var(--accent2);
+    transform: rotate(60deg);
+}
+
+/* ── Modal overlay ─────────────────────────────────────────────────────────── */
+
+#modalOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 16px;
+    overflow-y: auto;
+}
+
+#modalPanel {
+    width: 100%;
+    max-width: 680px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#modalHeader h2 {
+    font-size: 1.2rem;
+    color: var(--accent2);
+}
+
+#btnTancar {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+#btnTancar:hover {
+    color: var(--danger);
+}
+
+/* ── Formulari nova pregunta ───────────────────────────────────────────────── */
+
+#formNovaPregunta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+#formNovaPregunta h3 {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+#formNovaPregunta input,
+.targeta-pregunta input[type="text"] {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+#formNovaPregunta input:focus,
+.targeta-pregunta input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+#formNovaPregunta button {
+    align-self: flex-start;
+    padding: 10px 20px;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+#formNovaPregunta button:hover {
+    filter: brightness(1.15);
+}
+
+/* ── Targetes de pregunta ──────────────────────────────────────────────────── */
+
+#llistaPreguntesAdmin {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.targeta-pregunta {
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cap-pregunta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cap-pregunta input[type="text"] {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* ── Files d'opcions ───────────────────────────────────────────────────────── */
+
+.opcions-pregunta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 8px;
+    border-left: 2px solid var(--border);
+}
+
+.fila-opcio {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.fila-opcio input[type="text"] {
+    flex: 1;
+    min-width: 100px;
+}
+
+.fila-opcio label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+/* Botons d'acció petits (guardar / esborrar) */
+
+.targeta-pregunta button,
+.opcions-pregunta button {
+    padding: 7px 12px;
+    border: none;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: filter 0.15s;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.targeta-pregunta button:hover,
+.opcions-pregunta button:hover {
+    filter: brightness(1.2);
+}
+
+.btn-afegir-opcio {
+    align-self: flex-start;
+    color: var(--accent2) !important;
+    border-color: var(--accent2) !important;
+}
